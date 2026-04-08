@@ -1,0 +1,8 @@
+cd "C:\ProgramData\Jenkins\.jenkins\workspace\WebApp-CI-CD"
+dir target
+docker stop $(docker ps -q)
+docker rm $(docker ps -aq)
+docker run -d -p 8087:8080 `
+-v ${PWD}\target\sample-webapp.war:/usr/local/tomcat/webapps/sample-webapp.war `
+tomcat
+http://localhost:8087/sample-webapp
